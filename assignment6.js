@@ -37,7 +37,7 @@ const loadData = (tools) => {
                             <h1>${element.published_in}</h1>
                         </div>
                         <div class="card-actions my-auto">
-                            <i class="fa-solid fa-arrow-right"></i>
+                            <i id=${element.id} class="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
             </div>
@@ -48,10 +48,7 @@ const loadData = (tools) => {
     // =============== loop End ================
 
 }
-
 // ================================= Load Data End ======================================
-
-
 
 
 const fetchData2 = async () => {
@@ -66,28 +63,15 @@ const fetchData2 = async () => {
 const loadData2 = (tools) => {
 
     document.getElementById('tools-container').innerHTML = '';
-    
-    
-    //======== Creating a new array of Objects =======
-    let dateArray = [];
-    tools.forEach(date => {
-        let dateObject = {};
-        dateObject['date'] = date.published_in;
-        dateObject['name'] = date.name;
-        dateObject['image'] = date.image;
-        dateObject['features'] = date.features;
 
-        dateArray.push(dateObject)       
-    })
-
-    // ========== Sorting new array by date ===========
-    const sortedArray = dateArray.sort((a, b) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
-        return dateA - dateB;
-      });
-
-
+    // ========== Sorting array by date ===========
+    if (isSorted){
+        tools = tools.sort((a, b) => {
+            const dateA = new Date(a.published_in);
+            const dateB = new Date(b.published_in);
+            return dateA - dateB;
+          });
+    }
     
     const toolsContainer = document.getElementById('tools-container');
     // tools = tools.slice(0, 6);
@@ -114,7 +98,7 @@ const loadData2 = (tools) => {
                             <h1>${element.date}</h1>
                         </div>
                         <div class="card-actions my-auto">
-                            <i class="fa-solid fa-arrow-right"></i>
+                            <i id=${element.id} class="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
             </div>
