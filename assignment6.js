@@ -72,6 +72,7 @@ document.getElementById('btn-sort').addEventListener('click', async function(){
 })
 
 
+// ================================ Load Individual Data in Modal ===============================
 const fetchSingleTool = async id => {
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     const res = await fetch(url);
@@ -79,8 +80,9 @@ const fetchSingleTool = async id => {
     loadSingleTool(info.data);
 }
 
+
 const loadSingleTool = (tool) => {
-    console.log(tool)
+    console.log(tool.pricing[0].price)
 
     document.getElementById('headline').innerText = tool.description;
     document.getElementById('img').src = tool.image_link[0];
@@ -88,17 +90,29 @@ const loadSingleTool = (tool) => {
     document.getElementById('output').innerText = tool.input_output_examples[0].output;
     const features = document.getElementsByClassName('features');
     const integrations = document.getElementsByClassName('integrations');
+    const prices = document.getElementsByClassName('prices');
+    const plans = document.getElementsByClassName('plans');
     let i=1;
     for (const feature of features){
-        // console.log(feature.innerText, i);
         feature.innerText = tool.features[i].feature_name;
         i++;
     }
     let j=0;
     for (const integration of integrations){
-        // console.log(feature.innerText, i);
         integration.innerText = tool.use_cases[j].name;
         j++;
+    }
+
+    let k = 0;
+    for (const price of prices){
+        price.innerText = tool.pricing[k].price;
+        k++;
+    }
+
+    let l = 0;
+    for (const plan of plans){
+        plan.innerText = tool.pricing[l].plan;
+        l++;
     }
 
 }
