@@ -25,6 +25,7 @@ const loadData = (tools, isSorted = false) => {
 
     // =============== loop ==================
     tools.forEach(element => {
+        // console.log(element)
         
         const div = document.createElement('div');
         div.classList.add('card', 'w-11/12', 'bg-base-100', 'shadow-xl');
@@ -42,10 +43,13 @@ const loadData = (tools, isSorted = false) => {
                     <div class="flex flex-row justify-between">
                         <div>
                             <h1 class="font-bold text-2xl">${element.name}</h1>
-                            <h1>${element.date}</h1>
+                            <h1>${element.published_in}</h1>
                         </div>
-                        <div class="card-actions my-auto">
-                            <i id=${element.id} class="fa-solid fa-arrow-right"></i>
+                        <div onclick="fetchSingleTool('${element.id}')" class="my-auto">
+                                <label for="my-modal-02 class="text-2xl bg-red-100 hover:bg-red-300 text-red-800 font-bold py-1 px-2 rounded-full">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </label>
+                            
                         </div>
                     </div>
             </div>
@@ -66,5 +70,19 @@ document.getElementById('btn-sort').addEventListener('click', async function(){
     const info = await res.json();
     loadData(info.data.tools, isSorted = true);
 })
+
+
+const fetchSingleTool = async id => {
+    const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    const res = await fetch(url);
+    const info = await res.json();
+    loadSingleTool(info.data);
+}
+
+const loadSingleTool = (tool) => {
+    console.log(tool);
+    
+}
+
 
 fetchData();
