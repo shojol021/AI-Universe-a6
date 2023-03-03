@@ -80,12 +80,26 @@ const fetchSingleTool = async id => {
 }
 
 const loadSingleTool = (tool) => {
-    console.log(tool.input_output_examples[0].input)
+    console.log(tool)
 
     document.getElementById('headline').innerText = tool.description;
     document.getElementById('img').src = tool.image_link[0];
     document.getElementById('input').innerText = tool.input_output_examples[0].input;
     document.getElementById('output').innerText = tool.input_output_examples[0].output;
+    const features = document.getElementsByClassName('features');
+    const integrations = document.getElementsByClassName('integrations');
+    let i=1;
+    for (const feature of features){
+        // console.log(feature.innerText, i);
+        feature.innerText = tool.features[i].feature_name;
+        i++;
+    }
+    let j=0;
+    for (const integration of integrations){
+        // console.log(feature.innerText, i);
+        integration.innerText = tool.use_cases[j].name;
+        j++;
+    }
 
 }
 
