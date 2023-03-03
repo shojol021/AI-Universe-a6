@@ -116,7 +116,6 @@ const loadSingleTool = (tool) => {
             li.innerText = feature.feature_name;
             features.appendChild(li);
     }
-    // let j=0;
 
     const integrations = document.getElementById('integrations');
     if (tool.use_cases === null) {
