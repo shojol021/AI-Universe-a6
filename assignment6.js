@@ -46,7 +46,7 @@ const loadData = (tools, isSorted = false) => {
                             <h1>${element.published_in}</h1>
                         </div>
                         <div onclick="fetchSingleTool('${element.id}')" class="my-auto">
-                                <label for="my-modal-02 class="text-2xl bg-red-100 hover:bg-red-300 text-red-800 font-bold py-1 px-2 rounded-full">
+                                <label for="loadToolModal" class="text-2xl bg-red-100 hover:bg-red-300 text-red-800 font-bold py-1 px-2 rounded-full">
                                     <i class="fa-solid fa-arrow-right"></i>
                                 </label>
                             
@@ -80,8 +80,9 @@ const fetchSingleTool = async id => {
 }
 
 const loadSingleTool = (tool) => {
-    console.log(tool);
-    
+    console.log(tool)
+
+    document.getElementById('headline').innerText = tool.description;
 }
 
 
