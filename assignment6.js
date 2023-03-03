@@ -1,16 +1,28 @@
-const fetchData = async () => {
+let showAllClicked = false;
+
+const fetchData = async (limit) => {
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(url);
     const info = await res.json();
-    loadData(info.data.tools);
+    loadData(info.data.tools, false, limit);
 
 }
 
 // ================================= Load Data 2 ======================================
-const loadData = (tools, isSorted = false) => {
+const loadData = (tools, isSorted = false, limit = false,) => {
+    console.log(tools, isSorted, limit);
 
     document.getElementById('tools-container').innerHTML = '';
 
+    if(showAllClicked && !limit){
+        limit = false;
+    } else {
+        limit = 6;
+    }
+
+    if(limit){
+        tools = tools.slice(0, 6);
+    }
     // ========== Sorting array by date ===========
     if (isSorted){
         tools = tools.sort((a, b) => {
@@ -21,11 +33,9 @@ const loadData = (tools, isSorted = false) => {
     }
     
     const toolsContainer = document.getElementById('tools-container');
-    tools = tools.slice(0, 6);
 
     // =============== loop ==================
     tools.forEach(element => {
-        // console.log(element)
         
         const div = document.createElement('div');
         div.classList.add('card', 'w-11/12', 'bg-base-100', 'shadow-xl');
@@ -61,8 +71,14 @@ const loadData = (tools, isSorted = false) => {
 
 }
 
-// ================================= Load Data 2 End ======================================
+// ================================= Load Data End ======================================
 
+
+document.getElementById('btn-show-all').addEventListener('click', function(){
+    showAllClicked = true;
+    this.classList.add('hidden');
+    fetchData()
+})
 
 document.getElementById('btn-sort').addEventListener('click', async function(){
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
@@ -82,7 +98,6 @@ const fetchSingleTool = async id => {
 
 
 const loadSingleTool = (tool) => {
-    console.log(tool.pricing[0].price)
 
     document.getElementById('headline').innerText = tool.description;
     document.getElementById('img').src = tool.image_link[0];
@@ -105,7 +120,8 @@ const loadSingleTool = (tool) => {
 
     let k = 0;
     for (const price of prices){
-        price.innerText = tool.pricing[k].price;
+        console.log(tool.pricing);
+        price.innerText = tool.pricing[k].price == 'No cost' || tool.pricing[k].price == '0'? 'Free of cost' : `${tool.pricing[k].price}`;
         k++;
     }
 
@@ -117,5 +133,4 @@ const loadSingleTool = (tool) => {
 
 }
 
-
-fetchData();
+fetchData(6);
