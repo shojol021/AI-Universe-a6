@@ -1,6 +1,7 @@
 let showAllClicked = false;
 
 const fetchData = async (limit) => {
+    document.getElementById('spinner').classList.remove('hidden')
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(url);
     const info = await res.json();
@@ -8,8 +9,9 @@ const fetchData = async (limit) => {
 
 }
 
-// ================================= Load Data 2 ======================================
+// ================================= Load Data ======================================
 const loadData = (tools, isSorted = false, limit = false,) => {
+    
     console.log(tools);
 
     document.getElementById('tools-container').innerHTML = '';
@@ -65,10 +67,9 @@ const loadData = (tools, isSorted = false, limit = false,) => {
             </div>
         `;
         toolsContainer.appendChild(div);
-
     });
     // =============== loop End ================
-
+    document.getElementById('spinner').classList.add('hidden')
 }
 
 // ================================= Load Data End ======================================
@@ -81,6 +82,7 @@ document.getElementById('btn-show-all').addEventListener('click', function () {
 })
 
 document.getElementById('btn-sort').addEventListener('click', async function () {
+    document.getElementById('spinner').classList.remove('hidden')
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(url);
     const info = await res.json();
@@ -90,6 +92,7 @@ document.getElementById('btn-sort').addEventListener('click', async function () 
 
 // ================================ Load Individual Data in Modal ===============================
 const fetchSingleTool = async id => {
+    document.getElementById('spinner').classList.remove('hidden')
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     const res = await fetch(url);
     const info = await res.json();
@@ -98,13 +101,20 @@ const fetchSingleTool = async id => {
 
 
 const loadSingleTool = (tool) => {
+    
     console.log(tool);
 
     document.getElementById('headline').innerText = tool.description;
     document.getElementById('img').src = tool.image_link[0];
     document.getElementById('input').innerText = tool.input_output_examples ? `${tool.input_output_examples[0].input}` : 'Can you give any example?';
     document.getElementById('output').innerText = tool.input_output_examples ? `${tool.input_output_examples[0].output}` : 'No, not yet! Take a break!!!';
-    
+    if(tool.accuracy.score === null){
+        document.getElementById('accuracy').classList.add('hidden');
+    }
+    else{
+        document.getElementById('accuracy').classList.remove('hidden')
+        document.getElementById('accuracy').innerText = 'Accuracy: ' + tool.accuracy.score;
+    }
     
     const features = document.getElementById('features');
     const featuresValues = Object.values(tool.features);
@@ -159,6 +169,8 @@ const loadSingleTool = (tool) => {
             }
             l++;
         }
+
+        document.getElementById('spinner').classList.add('hidden')
 
     }
 
