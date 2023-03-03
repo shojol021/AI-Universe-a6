@@ -80,9 +80,13 @@ const fetchSingleTool = async id => {
 }
 
 const loadSingleTool = (tool) => {
-    console.log(tool)
+    console.log(tool.input_output_examples[0].input)
 
     document.getElementById('headline').innerText = tool.description;
+    document.getElementById('img').src = tool.image_link[0];
+    document.getElementById('input').innerText = tool.input_output_examples[0].input;
+    document.getElementById('output').innerText = tool.input_output_examples[0].output;
+
 }
 
 
