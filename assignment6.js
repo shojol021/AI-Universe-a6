@@ -104,13 +104,17 @@ const loadSingleTool = (tool) => {
     document.getElementById('img').src = tool.image_link[0];
     document.getElementById('input').innerText = tool.input_output_examples ? `${tool.input_output_examples[0].input}` : 'Can you give any example?';
     document.getElementById('output').innerText = tool.input_output_examples ? `${tool.input_output_examples[0].output}` : 'No, not yet! Take a break!!!';
-    const features = document.getElementsByClassName('features');
-    const prices = document.getElementsByClassName('prices');
-    const plans = document.getElementsByClassName('plans');
-    let i = 1;
-    for (const feature of features) {
-        feature.innerText = tool.features[i].feature_name;
-        i++;
+    
+    
+    const features = document.getElementById('features');
+    const featuresValues = Object.values(tool.features);
+    console.log(featuresValues);
+
+    document.getElementById('features').innerText = '';
+    for (const feature of featuresValues) {
+        const li = document.createElement('li')
+            li.innerText = feature.feature_name;
+            features.appendChild(li);
     }
     // let j=0;
 
@@ -131,12 +135,8 @@ const loadSingleTool = (tool) => {
             integrations.appendChild(li);
         }
     }
-        // }
-        // else{
-        //     integration.innerText = tool.use_cases[j]? `${tool.use_cases[j].name}`: 'no use case';
-        // }
 
-
+        const prices = document.getElementsByClassName('prices');
         let k = 0;
         console.log(tool.pricing)
         for (const price of prices) {
@@ -149,6 +149,7 @@ const loadSingleTool = (tool) => {
             k++;
         }
 
+        const plans = document.getElementsByClassName('plans');
         let l = 0;
         for (const plan of plans) {
             if (tool.pricing === null) {
