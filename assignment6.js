@@ -10,7 +10,7 @@ const fetchData = async (limit) => {
 
 // ================================= Load Data 2 ======================================
 const loadData = (tools, isSorted = false, limit = false,) => {
-    console.log(tools, isSorted, limit);
+    console.log(tools);
 
     document.getElementById('tools-container').innerHTML = '';
 
@@ -98,11 +98,12 @@ const fetchSingleTool = async id => {
 
 
 const loadSingleTool = (tool) => {
+    console.log(tool);
 
     document.getElementById('headline').innerText = tool.description;
     document.getElementById('img').src = tool.image_link[0];
-    document.getElementById('input').innerText = tool.input_output_examples[0].input;
-    document.getElementById('output').innerText = tool.input_output_examples[0].output;
+    document.getElementById('input').innerText = tool.input_output_examples? `${tool.input_output_examples[0].input}` : 'No Data';
+    document.getElementById('output').innerText = tool.input_output_examples? `${tool.input_output_examples[0].input}`: 'sample';
     const features = document.getElementsByClassName('features');
     const integrations = document.getElementsByClassName('integrations');
     const prices = document.getElementsByClassName('prices');
@@ -114,20 +115,29 @@ const loadSingleTool = (tool) => {
     }
     let j=0;
     for (const integration of integrations){
-        integration.innerText = tool.use_cases[j].name;
+        integration.innerText = tool.use_cases? `${tool.use_cases[j].name}`: 'no use case';
         j++;
     }
 
     let k = 0;
     for (const price of prices){
-        console.log(tool.pricing);
-        price.innerText = tool.pricing[k].price == 'No cost' || tool.pricing[k].price == '0'? 'Free of cost' : `${tool.pricing[k].price}`;
+        if(tool.pricing === null){
+            price.innerText = 'No Price Information';
+        }
+        else{
+            price.innerText = tool.pricing[k].price == 'No cost' || tool.pricing[k].price == '0'? 'Free of cost' : `${tool.pricing[k].price}`;
+        }
         k++;
     }
 
     let l = 0;
     for (const plan of plans){
-        plan.innerText = tool.pricing[l].plan;
+        if(tool.pricing === null){
+            plan.innerText = 'No package found'
+        }
+        else{
+            plan.innerText = tool.pricing[l].plan;
+        }
         l++;
     }
 
