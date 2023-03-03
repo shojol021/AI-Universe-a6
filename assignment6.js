@@ -21,7 +21,7 @@ const loadData = (tools, isSorted = false) => {
     }
     
     const toolsContainer = document.getElementById('tools-container');
-    // tools = tools.slice(0, 6);
+    tools = tools.slice(0, 6);
 
     // =============== loop ==================
     tools.forEach(element => {

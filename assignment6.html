@@ -24,30 +24,11 @@
         <section class="container mx-auto">
             <h1 class="font-bold text-center">Tools</h1>
             <div id="tools-container" class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-                <!-- <div class="card w-11/12 bg-base-100 shadow-xl">
-                    <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">
-                            Shoes!
-                            <div class="badge badge-secondary">NEW</div>
-                        </h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <hr>
-                        <div class="flex flex-row justify-between">
-                            <div>
-                                <h1>Title</h1>
-                                <h1>Title</h1>
-                            </div>
-                            <div class="card-actions my-auto">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
             </div>
 
+            <div class="text-center">
+                <button id="btn-show=all" class="btn btn-error text-white mt-3 mb-6">Show All &nbsp<i class="fa-solid fa-angle-down"></i></button>
+            </div>
         </section>
 
         <!-- =========== modal ============ -->       
@@ -55,27 +36,27 @@
         <div class="modal">
             <div class="modal-box w-11/12 max-w-5xl">
                 <label for="loadToolModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                <div class="flex flex-row justify-around">
-                    <div class="card card-compact bg-red-100 shadow-xl w-3/6">
-                        <div id="headline" class="text-center font-bold text-2xl mt-3">Headline</div>
+                <div class="flex flex-col lg:flex-row justify-around">
+                    <div class="card card-compact bg-red-100 shadow-xl w-11/12 lg:w-3/6 mx-auto">
+                        <div id="headline" class="text-center font-bold text-2xl text-slate-600 mt-3"></div>
                         <div>
                             <div id="tools-container" class="grid grid-cols-3 gap-3 p-3">
                                 <div class="card w-auto bg-base-100 shadow-xl">
                                     <div class="card-body items-center text-center">
-                                      <h2 class="card-title text-green-600 prices">Shoes!</h2>
-                                      <p class="plans font-bold">Price</p>
+                                      <h2 class="card-title text-green-600 prices"></h2>
+                                      <p class="plans font-bold"></p>
                                     </div>
                                 </div>
                                 <div class="card w-auto bg-base-100 shadow-xl">
                                     <div class="card-body items-center text-center">
-                                      <h2 class="card-title text-orange-600 prices">Shoes!</h2>
-                                      <p class="plans font-bold">Price</p>
+                                      <h2 class="card-title text-orange-600 prices"></h2>
+                                      <p class="plans font-bold"></p>
                                     </div>
                                 </div>
                                 <div class="card w-auto bg-base-100 shadow-xl">
                                     <div class="card-body items-center text-center">
-                                      <h2 class="card-title text-red-600 prices">Shoes!</h2>
-                                      <p class="plans font-bold">Price</p>
+                                      <h2 class="card-title text-red-600 prices"></h2>
+                                      <p class="plans font-bold"></p>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +83,7 @@
                     </div>
     
                     <div>
-                        <div class="card card-compact w-96 bg-base-100 shadow-xl">
+                        <div class="card card-compact w-11/12 lg:w-96 h-full mx-auto my-6 lg:my-0 bg-base-100 shadow-xl">
                             <figure><img src="" alt="Shoes" id="img" class="w-full" /></figure>
                             <div class="card-body items-center">
                               <h2 id="input" class="card-title"></h2>
