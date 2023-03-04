@@ -103,7 +103,7 @@ const fetchSingleTool = async id => {
 
 const loadSingleTool = (tool) => {
     
-    // console.log(tool);
+    console.log(tool);
 
     document.getElementById('headline').innerText = tool.description;
     document.getElementById('img').src = tool.image_link[0];
@@ -114,7 +114,7 @@ const loadSingleTool = (tool) => {
     }
     else{
         document.getElementById('accuracy').classList.remove('hidden')
-        document.getElementById('accuracy').innerText = 'Accuracy: ' + tool.accuracy.score;
+        document.getElementById('accuracy').innerText = 'Accuracy: ' + tool.accuracy.score*100 + '%';
     }
     
     const features = document.getElementById('features');
@@ -149,7 +149,7 @@ const loadSingleTool = (tool) => {
         let k = 0;
         for (const price of prices) {
             if (tool.pricing === null) {
-                price.innerText = 'No Price Information';
+                price.innerText = 'Free of cost';
             }
             else {
                 price.innerText = tool.pricing[k].price == 'No cost' || tool.pricing[k].price == '0' ? 'Free of cost' : `${tool.pricing[k].price}`;
@@ -161,7 +161,7 @@ const loadSingleTool = (tool) => {
         let l = 0;
         for (const plan of plans) {
             if (tool.pricing === null) {
-                plan.innerText = 'No package found'
+                plan.innerText = 'Free'
             }
             else {
                 plan.innerText = tool.pricing[l].plan;
