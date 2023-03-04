@@ -45,8 +45,7 @@ const loadData = (tools, isSorted = false, limit = false,) => {
             <figure> <img src=${element.image} alt="Shoes" /></figure>
             <div class="card-body">
                 <h2 class="card-title">
-                    Features!
-                    <div class="badge badge-secondary">NEW</div>
+                    Features:
                 </h2>
                     <ol class="list-decimal list-inside">
                         ${element.features.map(feature => `<li>${feature}</li>`).join("")}
