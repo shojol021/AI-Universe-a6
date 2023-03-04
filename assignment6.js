@@ -10,13 +10,13 @@ const fetchData = async (limit) => {
 }
 
 // ================================= Load Data ======================================
-const loadData = (tools, isSorted = false, limit = false,) => {
+const loadData = (tools, isSorted, limit) => {
     
-    console.log(tools);
+    // console.log(tools);
 
     document.getElementById('tools-container').innerHTML = '';
 
-    if (showAllClicked && !limit) {
+    if (showAllClicked) {
         limit = false;
     } else {
         limit = 6;
@@ -74,6 +74,7 @@ const loadData = (tools, isSorted = false, limit = false,) => {
 // ================================= Load Data End ======================================
 
 
+
 document.getElementById('btn-show-all').addEventListener('click', function () {
     showAllClicked = true;
     this.classList.add('hidden');
@@ -89,6 +90,7 @@ document.getElementById('btn-sort').addEventListener('click', async function () 
 })
 
 
+
 // ================================ Load Individual Data in Modal ===============================
 const fetchSingleTool = async id => {
     document.getElementById('spinner').classList.remove('hidden')
@@ -101,7 +103,7 @@ const fetchSingleTool = async id => {
 
 const loadSingleTool = (tool) => {
     
-    console.log(tool);
+    // console.log(tool);
 
     document.getElementById('headline').innerText = tool.description;
     document.getElementById('img').src = tool.image_link[0];
@@ -117,7 +119,6 @@ const loadSingleTool = (tool) => {
     
     const features = document.getElementById('features');
     const featuresValues = Object.values(tool.features);
-    console.log(featuresValues);
 
     document.getElementById('features').innerText = '';
     for (const feature of featuresValues) {
@@ -146,7 +147,6 @@ const loadSingleTool = (tool) => {
 
         const prices = document.getElementsByClassName('prices');
         let k = 0;
-        console.log(tool.pricing)
         for (const price of prices) {
             if (tool.pricing === null) {
                 price.innerText = 'No Price Information';
